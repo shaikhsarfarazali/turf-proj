@@ -1,0 +1,50 @@
+.main-blck{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .sub-blck{
+        ion-card{
+            width: 26rem;
+            border: 2px solid;
+            ion-card-header{
+                padding-top: 30px;
+                text-align: center;
+            }
+            .card-btn{
+                text-align: center;
+                border: 1px solid #6666667d;
+                ion-button{
+                    width: 48%;
+                }
+            }
+            .link{
+                color: #28ba62;
+            }
+
+            .link:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+ion-item{
+    border: 1px solid #6666667d;
+}
+.submit-btn{
+    width: 100%;
+}
+
+.error{
+    color:#cf3c4f;
+}
+
+ion-slides {
+    form{
+        width: 100%;
+        .head2{
+            padding-top: 2rem;
+        }
+    }
+  }

@@ -1,0 +1,100 @@
+<app-header></app-header>
+<ion-content>
+  <div class="main-blck">
+    <div class="sub-blck">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="head1">{{ userForm ? 'User' : 'Admin' }} Login</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="card-btn">
+            <ion-button class="btn" color="{{ userForm ? 'success' : 'light' }}" (click)="prev()">User
+              Login
+            </ion-button>
+            <ion-button class="btn" color="{{ userForm ? 'light' : 'success' }}" (click)="next()">Admin
+              Login
+            </ion-button>
+          </div>
+          <ion-slides [options]="slideOpts" #slides>
+            <ion-slide class="ion-padding-top">
+              <form [formGroup]="loginForm">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="text" placeholder="Username" formControlName="username" name="Username">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start" *ngIf="username.invalid && (username.dirty || username.touched)">
+                        <small class="error" *ngIf="username.errors?.required">Username is
+                          required</small>
+                        <small class="error" *ngIf="username.errors?.pattern">Invalid Username</small>
+                      </div>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="password" placeholder="Password" formControlName="usPassword"></ion-input>
+                      </ion-item>
+                      <div class="ion-text-start">
+                        <div class="ion-text-start"
+                          *ngIf="usPassword.invalid && (usPassword.dirty || usPassword.touched)">
+                          <small class="error" *ngIf="usPassword.errors?.required">Password is required</small>
+                        </div>
+                        <div class="ion-padding-top">
+                          <span class="btn link">Forgot Password</span>
+                        </div>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-button class="btn submit-btn" color="success" (click)="login('true')">Login</ion-button>
+                </ion-grid>
+                <h2 class="head2">Not A Member? <span class="btn link">SignUp Now </span></h2>
+              </form>
+            </ion-slide>
+            <ion-slide class="ion-padding-top">
+              <form [formGroup]="adminForm">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="text" placeholder="Email" formControlName="email" name="email">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start" *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <small class="error" *ngIf="email.errors?.required">Email is
+                          required</small>
+                        <small class="error" *ngIf="email.errors?.pattern">Invalid Email</small>
+                      </div>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="password" placeholder="Password" formControlName="adPassword"></ion-input>
+                      </ion-item>
+                      <div class="ion-text-start">
+                        <div class="ion-text-start"
+                          *ngIf="adPassword.invalid && (adPassword.dirty || adPassword.touched)">
+                          <small class="error" *ngIf="adPassword.errors?.required">Password is required</small>
+                        </div>
+                        <div class="ion-padding-top">
+                          <span class="btn link">Forgot Password</span>
+                        </div>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-button class="btn submit-btn" color="success" (click)="login('false')">Login</ion-button>
+                </ion-grid>
+                <h2 class="head2">Not A Member? <span class="btn link">SignUp Now </span></h2>
+              </form>
+            </ion-slide>
+          </ion-slides>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

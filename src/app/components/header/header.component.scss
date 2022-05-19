@@ -1,0 +1,30 @@
+ion-toolbar{
+    height: 5rem;
+}
+ion-grid{
+    height: 30px;
+    ion-row{
+        ion-icon{
+            font-size: xx-large;
+            margin: 2px;
+        }
+        ion-item{
+            bottom: 40px;
+            div{
+                margin: auto;
+            }
+            ion-img{
+                height: 6rem;
+            }
+        }
+        .link{
+            color: #666;
+        }
+        .link:link{
+            text-decoration: none;
+        }
+        .link:hover {
+            color: rgb(31, 243, 16);
+          }
+    }
+}

@@ -1,0 +1,44 @@
+<ion-header contentId="menu-content">
+  <ion-toolbar style="display:flex;">
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <ion-item>
+            <div>
+              <ion-img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQouHEQNYPAhkC5tRWybXF7mVdgsgLR9axhbu-HsyDQ6FDmv1SYycmjjgIrjH1QeGFnTHE&usqp=CAU">
+              </ion-img>
+            </div>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <a class="link" href="javascript:void(0)" (click)="navigate('/home')">Home</a>
+        </ion-col>
+
+        <ion-col>
+          <a class="link" href="javascript:void(0)" (click)="navigate('/about')">About Us</a>
+        </ion-col>
+
+        <ion-col>
+          <a class="link" href="javascript:void(0)" (click)="navigate('/contact-us')">Contact Us</a>
+        </ion-col>
+
+        <ion-col>
+          <a class="link" href="javascript:void(0)" (click)="navigate('/registration')">Registration</a>
+        </ion-col>
+        <ion-col size="2" class="ion-no-padding ion-margin-end">
+          <ion-searchbar style="padding:'0px';width:'16rem';text-align: left;" *ngIf="isSearchBar"
+            showCancelButton="true" (ionCancel)="isSearchBar=false" animated></ion-searchbar>
+        </ion-col>
+        <ion-col size="1" class="ion-no-padding">
+          <div class="ion-text-center">
+            <ion-icon class="btn link" name="search-sharp" (click)="isSearchBar=true" *ngIf="!isSearchBar"></ion-icon>
+            <ion-icon class="btn link" name="person" (click)="navigate('/login')"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>

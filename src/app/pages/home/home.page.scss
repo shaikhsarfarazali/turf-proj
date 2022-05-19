@@ -1,0 +1,22 @@
+.slider {
+  ion-slides {
+    // height: calc(100vh - 2rem);
+    --bullet-background: white;
+    --bullet-background-active: #2dd36f;
+    ion-img {
+      max-width: 100%;
+    }
+  }
+}
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

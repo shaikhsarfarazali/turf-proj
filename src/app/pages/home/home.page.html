@@ -1,0 +1,38 @@
+<app-header></app-header>
+<ion-content>
+  <section class="slider">
+    <ion-slides pager="true" [options]="slideOptsOne" #slideWithNav>
+      <ion-slide *ngFor="let eachImg of [1,2,3,4];let i = index;">
+        <div class="container">
+          <ion-img
+            src="https://www.teahub.io/photos/full/9-96672_1920x1080-images-about-football-wallpapers-hd-on-pinterest.jpg">
+          </ion-img>
+          <div class="centered">
+            <h3>Welcome</h3>
+            <span>
+              The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a
+              demonstration of proper code use.
+            </span>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </section>
+  <h1 class="ion-text-center"><b style="color:#2dd36f">All</b> Turf</h1>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="3.3" *ngFor="let item of turfList">
+      <ion-card class="ion-text-center ion-padding-bottom">
+        <ion-img [src]="item.img">
+        </ion-img>
+        <ion-card-header>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <ion-card-title>{{ item.title }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{ item.desc }}
+        </ion-card-content>
+        <ion-button fill="outline" color="success" (click)="navigate('/turf-detail')">Book Now</ion-button>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
