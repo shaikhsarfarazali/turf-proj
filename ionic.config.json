@@ -1,0 +1,7 @@
+{
+  "name": "turf",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
