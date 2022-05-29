@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CalendarComponent } from 'ionic2-calendar';
-import { CalModalPage } from '../cal-modal/cal-modal.page';
+import { EventModalPage } from '../event-modal/event-modal.page';
 @Component({
   selector: 'app-turf-detail',
   templateUrl: './turf-detail.page.html',
@@ -10,13 +10,37 @@ import { CalModalPage } from '../cal-modal/cal-modal.page';
 export class TurfDetailPage implements OnInit {
   @ViewChild(CalendarComponent) myCal: CalendarComponent
 
-  eventSource = [];
-  viewTitle: any;
+  eventSource: [];
+  viewTitle: string;
+  selectedBy = new Date();
 
   calendar = {
     mode: 'month',
     currentDate: new Date(),
   }
+
+  slots = [{
+    name: 'Shaikh Sarfaraz Ali',
+    time: new Date(),
+    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
+  }, {
+    name: 'Shaikh Sarfaraz Ali',
+    time: new Date(),
+    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
+  }, {
+    name: 'Shaikh Sarfaraz Ali',
+    time: new Date(),
+    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
+  }, {
+    name: 'Shaikh Sarfaraz Ali',
+    time: new Date(),
+    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
+  }, {
+    name: 'Shaikh Sarfaraz Ali',
+    time: new Date(),
+    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
+  }]
+
   constructor(public modalCtrl: ModalController) { }
 
   ngOnInit() {
@@ -34,102 +58,35 @@ export class TurfDetailPage implements OnInit {
     this.viewTitle = title;
   }
 
-  createRandomEvents() {
-    var events = [];
-    for (var i = 0; i < 50; i += 1) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
-      if (eventType === 0) {
-        startTime = new Date(
-          Date.UTC(
-            date.getUTCFullYear(),
-            date.getUTCMonth(),
-            date.getUTCDate() + startDay
-          )
-        );
-        if (endDay === startDay) {
-          endDay += 1;
-        }
-        endTime = new Date(
-          Date.UTC(
-            date.getUTCFullYear(),
-            date.getUTCMonth(),
-            date.getUTCDate() + endDay
-          )
-        );
-        events.push({
-          title: 'All Day - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: true,
-        });
-      } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate() + startDay,
-          0,
-          date.getMinutes() + startMinute
-        );
-        endTime = new Date(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate() + endDay,
-          0,
-          date.getMinutes() + endMinute
-        );
-        events.push({
-          title: 'Event - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: false,
-        });
-      }
-    }
-    this.eventSource = events;
-  }
-
   removeEvents() {
     this.eventSource = [];
   }
 
-  async openCalModal() {
-    const modal = await this.modalCtrl.create({
-      component: CalModalPage,
-      cssClass: 'cal-modal',
-      backdropDismiss: false
-    });
 
+  async addEvent() {
+    let modal = await this.modalCtrl.create({
+      component: EventModalPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'selectedDay': this.selectedBy
+      }
+
+    });
     await modal.present();
 
-    modal.onDidDismiss().then((result) => {
-      if (result.data && result.data.event) {
-        let event = result.data.event;
-        if (event.allDay) {
-          let start = event.startTime;
-          event.startTime = new Date(
-            Date.UTC(
-              start.getUTCFullYear(),
-              start.getUTCMonth(),
-              start.getUTCDate()
-            )
-          );
-          event.endTime = new Date(
-            Date.UTC(
-              start.getUTCFullYear(),
-              start.getUTCMonth(),
-              start.getUTCDate() + 1
-            )
-          );
-        }
-        this.eventSource.push(result.data.event);
-        this.myCal.loadEvents();
+    modal.onDidDismiss().then((selectedData: any) => {
+      let data = selectedData.data
+      if (data) {
+        let eventData: any = data;
+        eventData.startTime = new Date(data.startTime);
+        eventData.endTime = new Date(data.endTime);
+
+        let events: any = [];
+        events.push(eventData);
+        // this.eventSource = [];
+        setTimeout(() => {
+          this.eventSource = events;
+        })
       }
     });
   }

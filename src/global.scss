@@ -24,12 +24,14 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
 .btn{
     cursor: pointer;
 }
 
-h1, h2{
+h1, h2, h3{
     color: #000;
     font-size: xx-large;
     font-weight: 700;

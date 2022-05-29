@@ -25,3 +25,11 @@
     background-color: var(--ion-color-primary);
     border-radius: 15px;
   }
+
+  .scrollable{
+    overflow: auto;
+    height: 400px;
+  }
+  .sub-blk{
+    border: 2px solid #6666667d;
+  }

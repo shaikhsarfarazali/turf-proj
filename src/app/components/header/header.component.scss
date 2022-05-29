@@ -28,3 +28,14 @@ ion-grid{
           }
     }
 }
+.menus{
+    display: none;
+}
+@media screen and(max-width:700px){
+    .visibility{
+        display: none;
+    }
+    .menus{
+        display: block;
+    }
+}

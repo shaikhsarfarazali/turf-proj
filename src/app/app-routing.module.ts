@@ -30,16 +30,22 @@ const routes: Routes = [
   },
   {
     path: 'contact-us',
-    loadChildren: () => import('./pages/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
+    loadChildren: () => import('./pages/contact-us/contact-us.module').then(m => m.ContactUsPageModule)
   },
   {
     path: 'turf-detail',
-    loadChildren: () => import('./pages/turf-detail/turf-detail.module').then( m => m.TurfDetailPageModule)
+    loadChildren: () => import('./pages/turf-detail/turf-detail.module').then(m => m.TurfDetailPageModule)
   },
   {
-    path: 'cal-modal',
-    loadChildren: () => import('./pages/cal-modal/cal-modal.module').then( m => m.CalModalPageModule)
+    path: 'test',
+    loadChildren: () => import('./pages/test/test.module').then(m => m.TestPageModule)
   },
+  {
+    path: 'event-modal',
+    loadChildren: () => import('./pages/event-modal/event-modal.module').then(m => m.EventModalPageModule)
+  },
+
+
 ];
 
 @NgModule({

@@ -20,4 +20,4 @@ import { IeComponentsModule } from 'src/app/components/components.module';
   ],
   declarations: [LoginPage],
 })
-export class LoginPageModule {}
+export class LoginPageModule { }

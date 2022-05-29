@@ -8,6 +8,7 @@ import { RegistrationPageRoutingModule } from './registration-routing.module';
 
 import { RegistrationPage } from './registration.page';
 import { IeComponentsModule } from 'src/app/components/components.module';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { IeComponentsModule } from 'src/app/components/components.module';
     RegistrationPageRoutingModule,
     IeComponentsModule,
     ReactiveFormsModule,
+    SwiperModule
   ],
   declarations: [RegistrationPage],
 })
-export class RegistrationPageModule {}
+export class RegistrationPageModule { }

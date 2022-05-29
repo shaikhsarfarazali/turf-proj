@@ -9,7 +9,6 @@ import { TurfDetailPageRoutingModule } from './turf-detail-routing.module';
 import { TurfDetailPage } from './turf-detail.page';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { IeComponentsModule } from 'src/app/components/components.module';
-import { CalModalPageModule } from '../cal-modal/cal-modal.module';
 
 @NgModule({
   imports: [
@@ -18,7 +17,6 @@ import { CalModalPageModule } from '../cal-modal/cal-modal.module';
     IonicModule,
     TurfDetailPageRoutingModule,
     NgCalendarModule,
-    CalModalPageModule,
     IeComponentsModule
   ],
   declarations: [TurfDetailPage]

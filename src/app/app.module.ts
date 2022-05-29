@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgCalendarModule } from 'ionic2-calendar';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgCalendarModule
+    NgCalendarModule,
+    SwiperModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

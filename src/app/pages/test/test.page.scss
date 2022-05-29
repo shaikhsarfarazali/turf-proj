@@ -10,13 +10,13 @@ swiper{
 }
 
 ion-card{
-    width: 50%;
+    width: 60%;
     border: 2px solid;
     margin: auto;
-    // ion-card-header{
-    //     padding-top: 30px;
-    //     text-align: center;
-    // }
+    ion-card-header{
+        padding-top: 30px;
+        text-align: center;
+    }
     .card-btn{
         text-align: center;
         border: 1px solid #6666667d;
@@ -41,15 +41,10 @@ ion-card{
     }
 
     .submit-btn{
-        width: 85%;
+        width: 100%;
     }
     
     .error{
         color:#cf3c4f;
-    }
-}
-@media screen and (max-width: 706px) {
-    ion-card{
-    width: 100%;
     }
 }

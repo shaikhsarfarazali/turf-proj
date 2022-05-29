@@ -18,24 +18,6 @@
     </ion-segment-button>
   </ion-segment>
 
-
-  <ion-row>
-    <ion-col></ion-col>
-
-    <ion-col size="5">
-      <ion-button color="success" (click)="createRandomEvents()" expand="block" fill="outline">
-        Add random events
-      </ion-button>
-    </ion-col>
-    <ion-col size="5">
-      <ion-button color="success" (click)="removeEvents()" expand="block" fill="outline">
-        Remove all events
-      </ion-button>
-    </ion-col>
-    <ion-col></ion-col>
-
-  </ion-row>
-
   <ion-row>
     <!-- Move back one screen of the slides -->
     <ion-col size="2" class="ion-padding">
@@ -50,21 +32,56 @@
 
     <!-- Move forward one screen of the slides -->
     <ion-col size="2" class="ion-padding">
-      <ion-button color="success" fill="clear" (click)="openCalModal()">
+      <ion-button color="success" fill="outline" (click)="addEvent()">
         <ion-icon name="add" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>
-  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
-    (onTitleChanged)="onViewTitleChanged($event)" [monthviewDisplayEventTemplate]="template">
-  </calendar>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="5">
+      <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+        (onTitleChanged)="onViewTitleChanged($event)" [monthviewDisplayEventTemplate]="template">
+      </calendar>
 
-  <ng-template #template let-view="view" let-row="row" let-col="col">
-    <div [class.with-event]="view.dates[row*7+col].events.length">
-      {{view.dates[row*7+col].label}}
-      <div class="indicator-container">
-        <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
-      </div>
-    </div>
-  </ng-template>
+      <ng-template #template let-view="view" let-row="row" let-col="col">
+        <div [class.with-event]="view.dates[row*7+col].events.length">
+          {{view.dates[row*7+col].label}}
+          <div class="indicator-container">
+            <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
+          </div>
+        </div>
+      </ng-template>
+    </ion-col>
+    <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="5">
+      <ion-list class="ion-no-padding">
+        <ion-list-header color="success" fill="outline" class="sub-blk"> Booked Slots </ion-list-header>
+        <div class="scrollable">
+
+          <ion-item *ngFor="let slot of slots;let i = index">
+            <ion-avatar slot="start">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQouHEQNYPAhkC5tRWybXF7mVdgsgLR9axhbu-HsyDQ6FDmv1SYycmjjgIrjH1QeGFnTHE&usqp=CAU" />
+            </ion-avatar>
+            <ion-label>
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Mr. {{ slot.name }}</ion-card-title>
+                  <ion-card-subtitle>Date :- From :- {{ slot.time | date: 'dd.MM.yyyy' }} To :- {{ slot.time | date:
+                    'dd.MM.yyyy'
+                    }}</ion-card-subtitle>
+                </ion-card-header>
+
+                <ion-card-content>
+                  {{ slot.address }}
+                </ion-card-content>
+              </ion-card>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-list>
+    </ion-col>
+    <ion-col></ion-col>
+
+  </ion-row>
 </ion-content>

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Select Your Slot</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label color="dark" position="floating">Title</ion-label>
+      <ion-input tpye="text" [(ngModel)]="event.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark">Start</ion-label>
+      <ion-input value="{{ event.startTime | date: 'dd.MM.yyyy' }}" id="startDate" class="ion-text-end"></ion-input>
+      <ion-popover trigger="startDate" size="cover">
+        <ng-template>
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" presentation="date" [(ngModel)]="event.startTime"
+            [min]="minDate">
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark">End</ion-label>
+      <ion-input value="{{ event.endTime | date: 'dd.MM.yyyy' }}" id="endDate" class="ion-text-end"></ion-input>
+      <ion-popover trigger="endDate" size="cover">
+        <ng-template>
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" presentation="date" [(ngModel)]="event.endTime"
+            [min]="minDate">
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark">All Day?</ion-label>
+      <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>
+    </ion-item>
+    <ion-button class="ion-margin" expand="full" fill="outline" color="success" (click)="save()">Add Event
+      <!-- <ion-icon slot="end" name="checkmark"></ion-icon> -->
+    </ion-button>
+  </ion-list>
+</ion-content>
