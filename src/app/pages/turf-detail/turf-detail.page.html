@@ -18,7 +18,7 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-row>
+  <ion-row class="ion-margin-end">
     <!-- Move back one screen of the slides -->
     <ion-col size="2" class="ion-padding">
       <!-- <ion-button color="success" fill="clear" (click)="back()">
@@ -58,7 +58,7 @@
         <ion-list-header color="success" fill="outline" class="sub-blk"> Booked Slots </ion-list-header>
         <div class="scrollable">
 
-          <ion-item *ngFor="let slot of slots;let i = index">
+          <ion-item *ngFor="let slot of events;let i = index">
             <ion-avatar slot="start">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQouHEQNYPAhkC5tRWybXF7mVdgsgLR9axhbu-HsyDQ6FDmv1SYycmjjgIrjH1QeGFnTHE&usqp=CAU" />
@@ -66,8 +66,9 @@
             <ion-label>
               <ion-card>
                 <ion-card-header>
-                  <ion-card-title>Mr. {{ slot.name }}</ion-card-title>
-                  <ion-card-subtitle>Date :- From :- {{ slot.time | date: 'dd.MM.yyyy' }} To :- {{ slot.time | date:
+                  <ion-card-title>Mr. {{ slot.title }}</ion-card-title>
+                  <ion-card-subtitle>Date :- From :- {{ slot.startTime | date: 'dd.MM.yyyy' }} To :- {{ slot.endTime |
+                    date:
                     'dd.MM.yyyy'
                     }}</ion-card-subtitle>
                 </ion-card-header>
@@ -78,6 +79,16 @@
               </ion-card>
             </ion-label>
           </ion-item>
+          <div *ngIf="events.length == 0" class="ion-text-center no-data-blk">
+            <ion-card-header>
+              <ion-card-title>
+                <ion-icon name="alert-circle-outline"></ion-icon>
+                <h1>
+                  No Slots Booked Yet
+                </h1>
+              </ion-card-title>
+            </ion-card-header>
+          </div>
         </div>
       </ion-list>
     </ion-col>

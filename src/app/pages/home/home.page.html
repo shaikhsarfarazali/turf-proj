@@ -1,6 +1,5 @@
 <app-header></app-header>
 <ion-content>
-  <ion-button (click)="navigate('/test')">Test</ion-button>
   <section class="slider">
     <ion-slides pager="true" [options]="slideOptsOne" #slideWithNav>
       <ion-slide *ngFor="let eachImg of [1,2,3,4];let i = index;">
@@ -9,7 +8,7 @@
             src="https://www.teahub.io/photos/full/9-96672_1920x1080-images-about-football-wallpapers-hd-on-pinterest.jpg">
           </ion-img>
           <div class="centered">
-            <h3>Welcome</h3>
+            <h4>Welcome</h4>
             <span>
               The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a
               demonstration of proper code use.

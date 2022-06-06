@@ -26,7 +26,12 @@ export class EventModalPage implements OnInit {
   }
 
   save() {
-    console.log(this.event);
+    // console.log(this.event);
     this.modalCtrl.dismiss(this.event);
   }
+
+  dismissModal() {
+    this.modalCtrl.dismiss()
+  }
+
 }

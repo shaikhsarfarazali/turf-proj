@@ -13,33 +13,13 @@ export class TurfDetailPage implements OnInit {
   eventSource: [];
   viewTitle: string;
   selectedBy = new Date();
+  events: any = [];
 
   calendar = {
     mode: 'month',
     currentDate: new Date(),
   }
 
-  slots = [{
-    name: 'Shaikh Sarfaraz Ali',
-    time: new Date(),
-    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
-  }, {
-    name: 'Shaikh Sarfaraz Ali',
-    time: new Date(),
-    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
-  }, {
-    name: 'Shaikh Sarfaraz Ali',
-    time: new Date(),
-    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
-  }, {
-    name: 'Shaikh Sarfaraz Ali',
-    time: new Date(),
-    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
-  }, {
-    name: 'Shaikh Sarfaraz Ali',
-    time: new Date(),
-    address: 'Sharifa Road, Amrut Nagar, Mumbra Thane- 400612'
-  }]
 
   constructor(public modalCtrl: ModalController) { }
 
@@ -69,7 +49,8 @@ export class TurfDetailPage implements OnInit {
       cssClass: 'my-custom-class',
       componentProps: {
         'selectedDay': this.selectedBy
-      }
+      },
+      swipeToClose: false,
 
     });
     await modal.present();
@@ -80,12 +61,10 @@ export class TurfDetailPage implements OnInit {
         let eventData: any = data;
         eventData.startTime = new Date(data.startTime);
         eventData.endTime = new Date(data.endTime);
-
-        let events: any = [];
-        events.push(eventData);
+        this.events.push(eventData);
         // this.eventSource = [];
         setTimeout(() => {
-          this.eventSource = events;
+          this.eventSource = this.events;
         })
       }
     });

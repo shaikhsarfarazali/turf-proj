@@ -1,16 +1,22 @@
 <ion-header>
   <ion-toolbar color="success">
     <ion-title>Select Your Slot</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label color="dark" position="floating">Title</ion-label>
+      <ion-label color="dark" position="floating">Your Name</ion-label>
       <ion-input tpye="text" [(ngModel)]="event.title"></ion-input>
     </ion-item>
-
+    <ion-item>
+      <ion-label color="dark" position="floating">Your Address</ion-label>
+      <ion-input tpye="text" [(ngModel)]="event.address"></ion-input>
+    </ion-item>
     <ion-item>
       <ion-label color="dark">Start</ion-label>
       <ion-input value="{{ event.startTime | date: 'dd.MM.yyyy' }}" id="startDate" class="ion-text-end"></ion-input>
