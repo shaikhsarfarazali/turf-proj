@@ -33,8 +33,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/contact-us/contact-us.module').then(m => m.ContactUsPageModule)
   },
   {
-    path: 'turf-detail',
-    loadChildren: () => import('./pages/turf-detail/turf-detail.module').then(m => m.TurfDetailPageModule)
+    path: 'turf-booking',
+    loadChildren: () => import('./pages/Turf/turf-booking/turf-booking.module').then(m => m.TurfBookingPageModule)
   },
   {
     path: 'test',
@@ -44,6 +44,11 @@ const routes: Routes = [
     path: 'event-modal',
     loadChildren: () => import('./pages/event-modal/event-modal.module').then(m => m.EventModalPageModule)
   },
+  {
+    path: 'turf-detail',
+    loadChildren: () => import('./pages/Turf/turf-detail/turf-detail.module').then(m => m.TurfDetailPageModule)
+  },
+
 
 
 ];

@@ -8,7 +8,7 @@ import {
 } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { NavigationExtras } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { GlobalProvider } from './global';
 
 @Injectable({
@@ -23,10 +23,11 @@ export class BaseHelper {
     protected toastController: ToastController,
     protected modalCtrl: ModalController,
     protected navCtrl: NavController,
+    protected router: Router,
     protected menu: MenuController,
     protected storage: Storage,
     private g: GlobalProvider
-  ) {}
+  ) { }
 
   async toast(message, duration = 2000, color = `success`) {
     const toast = await this.toastController.create({
@@ -103,6 +104,15 @@ export class BaseHelper {
   }
   navigate(path, queryParams = null) {
     this.navCtrl.navigateForward(path, { queryParams });
+  }
+
+  clearNavigate(path, queryParams) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        user: queryParams
+      }
+    };
+    this.router.navigate([path], navigationExtras);
   }
 
   pop() {

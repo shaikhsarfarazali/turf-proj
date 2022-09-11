@@ -5,7 +5,7 @@
       <ion-slide *ngFor="let eachImg of [1,2,3,4];let i = index;">
         <div class="container">
           <ion-img
-            src="https://www.teahub.io/photos/full/9-96672_1920x1080-images-about-football-wallpapers-hd-on-pinterest.jpg">
+            src="https://images.unsplash.com/photo-1630259900856-86e94006646e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1208&q=80">
           </ion-img>
           <div class="centered">
             <h4>Welcome</h4>
@@ -18,21 +18,34 @@
       </ion-slide>
     </ion-slides>
   </section>
-  <h1 class="ion-text-center"><b style="color:#2dd36f">All</b> Turf</h1>
+  <ion-row>
+    <ion-col size="12">
+      <h1 class="ion-text-center"><b style="color:#2dd36f">All</b> Turf</h1>
+    </ion-col>
+    <ion-col size="10" class="ion-no-padding" style="margin: auto;">
+      <ion-searchbar showCancelButton="true" (ionCancel)="isSearchBar=false" (input)="onSearch($event)" animated>
+      </ion-searchbar>
+    </ion-col>
+  </ion-row>
   <ion-row class="ion-justify-content-center">
     <ion-col size="3.3" *ngFor="let item of turfList" size-xs="12" size-sm="12" size-md="6" size-lg="3.3">
       <ion-card class="ion-text-center ion-padding-bottom">
-        <ion-img [src]="item.img">
+        <ion-img
+          src="https://www.teahub.io/photos/full/9-96672_1920x1080-images-about-football-wallpapers-hd-on-pinterest.jpg">
         </ion-img>
         <ion-card-header>
-          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
-          <ion-card-title>{{ item.title }}</ion-card-title>
+          <ion-card-title>{{ item.turf_name }}</ion-card-title>
+          <ion-card-subtitle>{{ item.turf_contact_1 }} </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          {{ item.desc }}
+          {{ item.turf_description | slice:0:200 }}
         </ion-card-content>
-        <ion-button fill="outline" color="success" (click)="navigate('/turf-detail')">Book Now</ion-button>
+        <ion-button fill="outline" color="success" (click)="navigate('/turf-detail',item)">Book Now</ion-button>
       </ion-card>
     </ion-col>
   </ion-row>
+
+  <div class="spin" *ngIf="loading">
+    <ion-spinner color="success" name="circles"></ion-spinner>
+  </div>
 </ion-content>

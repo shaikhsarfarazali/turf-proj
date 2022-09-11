@@ -4,10 +4,12 @@
 
 export const environment = {
   production: false,
+  url: 'https://turf-test-api.ignitech.in/api'
 };
 
 export const ns = '';
-export const domainRaw = 'http://localhost:80/turf/apis';
+// export const domainRaw = 'http://localhost:80/turf/apis';
+export const domainRaw = 'https://turf-test-api.ignitech.in/api';
 export const domain = `${domainRaw}${ns}`;
 
 /*

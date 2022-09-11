@@ -1,0 +1,23 @@
+.det-blk{
+    margin: auto;
+}
+.sts {
+  padding: 10px;
+}
+
+.sts-p {
+  background-color: #ffc409;
+  }
+  
+  .sts-a {
+    background-color: #2dd36f;
+  }
+  
+  ion-list {
+      display: flex;
+      flex-wrap: wrap;
+      background: transparent;
+    }
+  ion-badge {
+      border-radius: 20%;
+    }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonSlides } from '@ionic/angular';
 import { PublicApiService } from 'src/api/public_api.service';
+import { TurfApiService } from 'src/api/turf_api.service';
 import { BaseHelper } from 'src/helper/baseHelper';
 import { GlobalProvider } from 'src/helper/global';
 
@@ -29,18 +30,16 @@ export class LoginPage implements OnInit {
   constructor(
     private b: BaseHelper,
     private g: GlobalProvider,
-    private api: PublicApiService,
+    private api: TurfApiService,
     public fb: FormBuilder
   ) {
     this.loginForm = this.fb.group({
-      id: 0,
       username: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\-]+$/)]],
       usPassword: ['', [Validators.required, Validators.maxLength(100)]],
     });
     this.adminForm = this.fb.group({
-      id: 0,
       email: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
-      adPassword: ['', [Validators.required, Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.maxLength(100)]],
     });
   }
 
@@ -55,30 +54,23 @@ export class LoginPage implements OnInit {
     return this.adminForm.get('email');
   }
   get adPassword() {
-    return this.adminForm.get('adPassword');
+    return this.adminForm.get('password');
   }
 
   ngOnInit() {
     this.slides.lockSwipes(true)
   }
 
-  async login(status) {
+  params: any;
+  async login(ev?) {
+    debugger
     this.b.loadLoading(true);
-    let postData;
-    if (status) {
-      postData = {
-        userData: {
-          ...this.loginForm?.value
-        },
-      };
+    if (ev) {
+      this.params = this.loginForm?.value
     } else {
-      postData = {
-        userData: {
-          ...this.adminForm?.value
-        },
-      };
+      this.params = this.adminForm?.value
     }
-    (await this.api.login(postData)).subscribe(
+    (await this.api.turfLogin(this.params)).subscribe(
       async (result) => {
         const r: any = result;
 
