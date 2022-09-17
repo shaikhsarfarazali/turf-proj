@@ -2,17 +2,18 @@
 <ion-content class="ion-text-center bg-img">
   <ion-card class="crd-blk">
     <ion-card-header>
-      <h1>{{ userForm ? 'User' : 'Admin' }} Registration</h1>
+      <!-- {{ userForm ? 'User' : 'Admin' }} -->
+      <h1>Registration</h1>
     </ion-card-header>
 
-    <div class="card-btn">
-      <ion-button class="btn" color="{{ userForm ? 'success' : 'light' }}" (click)="slidePrev()">User
+    <!-- <div class="card-btn">
+      <ion-button class="btn" color="{{ userForm ? 'success' : 'light' }}" (click)="slidePrev()">
         Registration
       </ion-button>
       <ion-button class="btn" color="{{ userForm ? 'light' : 'success' }}" (click)="slideNext()">Admin
         Registration
       </ion-button>
-    </div>
+    </div> -->
     <swiper [config]="config" #swiper>
       <ng-template swiperSlide>
         <form [formGroup]="form" (ngSubmit)="register('true')">
@@ -66,6 +67,25 @@
                     *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
                     <small class="error" *ngIf="confirmPassword.errors?.required">Confirm Password is
                       required</small>
+                    <small class="error" *ngIf="confirmPassword.errors.confirmedValidator">Password and Confirm Password
+                      must be match.</small>
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="10">
+                <ion-item>
+                  <ion-input type="text" placeholder="Please Enter Your Mobile No." formControlName="mobile_no"
+                    maxlength="10">
+                  </ion-input>
+                </ion-item>
+                <div class="ion-text-start">
+
+                  <div class="ion-text-start" *ngIf="mobile_no.invalid && (mobile_no.dirty || mobile_no.touched)">
+                    <small class="error" *ngIf="mobile_no.errors?.required">Mobile No is
+                      required</small>
+                    <small class="error" *ngIf="mobile_no.errors?.pattern || mobile_no.errors?.minlength">Mobile No is
+                      Invalid</small>
                   </div>
                 </div>
               </ion-col>
@@ -83,8 +103,8 @@
         </form>
       </ng-template>
 
-      <ng-template swiperSlide>
-        <form [formGroup]="adminForm" (ngSubmit)="register('false')">
+      <!-- <ng-template swiperSlide>
+        <form [formGroup]="adminForm" (ngSubmit)="register()">
           <ion-grid>
             <ion-row class="ion-justify-content-center">
               <ion-col size="10">
@@ -164,7 +184,7 @@
           </ion-grid>
           <p class="ion-text-center">Already have an account? <span class="btn link">Login Now </span></p>
         </form>
-      </ng-template>
+      </ng-template> -->
     </swiper>
   </ion-card>
 </ion-content>

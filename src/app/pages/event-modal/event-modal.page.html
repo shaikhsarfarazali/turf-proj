@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar color="success">
     <ion-title>Select Your Slot</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">Close</ion-button>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="end" name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -22,8 +24,8 @@
       <ion-input value="{{ event.startTime | date: 'dd.MM.yyyy' }}" id="startDate" class="ion-text-end"></ion-input>
       <ion-popover trigger="startDate" size="cover">
         <ng-template>
-          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" presentation="date" [(ngModel)]="event.startTime"
-            [min]="minDate">
+          <ion-datetime color="success" [showDefaultButtons]="true" displayFormat="MM/DD/YYYY HH:mm" presentation="date"
+            [(ngModel)]="event.startTime" [min]="minDate">
           </ion-datetime>
         </ng-template>
       </ion-popover>
@@ -34,8 +36,8 @@
       <ion-input value="{{ event.endTime | date: 'dd.MM.yyyy' }}" id="endDate" class="ion-text-end"></ion-input>
       <ion-popover trigger="endDate" size="cover">
         <ng-template>
-          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" presentation="date" [(ngModel)]="event.endTime"
-            [min]="minDate">
+          <ion-datetime color="success" [showDefaultButtons]="true" displayFormat="MM/DD/YYYY HH:mm" presentation="date"
+            [(ngModel)]="event.endTime" [min]="minDate">
           </ion-datetime>
         </ng-template>
       </ion-popover>

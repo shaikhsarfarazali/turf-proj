@@ -1,9 +1,11 @@
 import { AfterContentChecked, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Validator } from 'src/api/api_base.service';
+import { AuthService } from 'src/api/auth.service';
 import { PublicApiService } from 'src/api/public_api.service';
 import { BaseHelper } from 'src/helper/baseHelper';
 import { GlobalProvider } from 'src/helper/global';
+import { PswrdValidator } from 'src/helper/pswrd.validator';
 import SwiperCore, { Navigation, Pagination, EffectCube, A11y, SwiperOptions, EffectCards, EffectCoverflow } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 
@@ -24,6 +26,7 @@ export class RegistrationPage implements OnInit {
     spaceBetween: 50,
     pagination: false,
     allowTouchMove: false,
+    enabled: false
     // effect: 'creative',
   };
 
@@ -44,6 +47,9 @@ export class RegistrationPage implements OnInit {
   }
   get confirmPassword() {
     return this.form.get('confirmPassword');
+  }
+  get mobile_no() {
+    return this.form.get('mobile_no');
   }
   get tnc() {
     return this.form.get('tnc');
@@ -68,18 +74,26 @@ export class RegistrationPage implements OnInit {
   get adTnc() {
     return this.adminForm.get('adTnc');
   }
+
   constructor(private b: BaseHelper,
     private g: GlobalProvider,
-    private api: PublicApiService) {
+    private authService: AuthService) {
+
+  }
+
+  ngOnInit(): void {
     this.form = new FormBuilder().group({
       id: 0,
       name: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(Validator.name)]],
       email: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(Validator.email)]],
       password: ['', [Validators.required, Validators.maxLength(100)]],
-      confirmPassword: ['', [Validators.required, Validators.maxLength(100)]],
+      confirmPassword: ['', [Validators.required]],
+      mobile_no: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(Validator.phone)]],
       tnc: [false]
       // contact: ['', [Validators.required, Validators.maxLength(10)]],
       // username: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\-]+$/)]],
+    }, {
+      validator: PswrdValidator('password', 'confirmPassword')
     });
 
     this.adminForm = new FormBuilder().group({
@@ -95,36 +109,24 @@ export class RegistrationPage implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-
-  }
-
   ngAfterContentChecked(): void {
     if (this.swiper) {
       this.swiper.updateSwiper({});
     }
   }
 
-  async register(status) {
+  async register(ev) {
+    let params: any;
     this.b.loadLoading(true);
-    let postData;
-    if (status) {
-      postData = {
-        userData: {
-          ...this.form?.value
-        },
-      };
+    if (ev) {
+      params = this.form?.value
     } else {
-      postData = {
-        userData: {
-          ...this.adminForm?.value
-        },
-      };
+      params = this.adminForm?.value
     }
-    (await this.api.register(postData)).subscribe(
+    (await this.authService.turfRegister(params)).subscribe(
       async (result) => {
         const r: any = result;
-        console.log(`login??`, r);
+        console.log(`Registered??`, r);
         if (r.formFilled) {
           this.b.setJws(r.token, r.mediaUrl);
 
@@ -134,7 +136,6 @@ export class RegistrationPage implements OnInit {
         }
       },
       (error) => {
-        console.log(`err?`, error);
         console.log(`err?`, error);
         // if(error.error && error.error.message) this.b.toastUp(error.error.message, 2000,
         //   "danger")

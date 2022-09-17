@@ -30,12 +30,16 @@
       <ion-col size="10" class=" det-blk">
         <ion-card>
           <ion-card-header>
-            <ion-card-title> {{ turfData.turf_name }} </ion-card-title>
-            <ion-card-subtitle> {{ turfData.turf_description }} </ion-card-subtitle>
+            <ion-item>
+              <ion-card-title> {{ turfData.turf_name }} </ion-card-title>
+              <ion-button slot="end" color="warning" (click)="navigate('/turf-booking',turfData)">Book Now
+              </ion-button>
+            </ion-item>
+            <ion-card-subtitle class="ion-padding"> {{ turfData.turf_description }} </ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
-            <ion-card class="crd-blk">
+            <ion-card>
               <ion-row>
 
                 <ion-col size="4">

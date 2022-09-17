@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { TurfApiService } from 'src/api/turf_api.service';
+import { BaseHelper } from 'src/helper/baseHelper';
 
 @Component({
   selector: 'app-turf-detail',
@@ -23,7 +24,7 @@ export class TurfDetailPage implements OnInit {
 
   loading: boolean = true;
 
-  constructor(private route: ActivatedRoute, public modalCtrl: ModalController, private router: Router, private turfApiService: TurfApiService) { }
+  constructor(private b: BaseHelper, private route: ActivatedRoute, public modalCtrl: ModalController, private router: Router, private turfService: TurfApiService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -34,12 +35,16 @@ export class TurfDetailPage implements OnInit {
     });
   }
   getResources(id) {
-    this.turfApiService.getResourceById(id).subscribe((res) => {
+    this.turfService.getResourceById(id).subscribe((res) => {
       res.length > 0 ?
         (this.turfData['resources'] = res, this.loading = false) : '';
     },
       (error) => {
         throw error
       })
+  }
+
+  navigate(path, data) {
+    this.b.clearNavigate(path, data);
   }
 }

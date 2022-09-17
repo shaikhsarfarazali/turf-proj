@@ -1,98 +1,126 @@
-<app-header></app-header>
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{ turfData.turf_name }} </ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-  <ion-card-header class="ion-text-center">
-    <h1><b style="color:#2dd36f">Turf</b> Detail</h1>
-  </ion-card-header>
-  <hr width="80%" color="#6666667d">
+  <div>
+    <ion-card-header class="ion-text-center">
+      <h1><b style="color:#2dd36f">Turf</b> Booking</h1>
+    </ion-card-header>
+    <hr width="80%" color="#6666667d">
 
-  <ion-segment color="success" [(ngModel)]="calendar.mode">
-    <ion-segment-button value="month">
-      <ion-label>Month</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="week">
-      <ion-label>Week</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="day">
-      <ion-label>Day</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+    <ion-row class="ion-margin-end">
+      <!-- Move back one screen of the slides -->
+      <ion-col size="2" class="ion-padding">
+      </ion-col>
 
-  <ion-row class="ion-margin-end">
-    <!-- Move back one screen of the slides -->
-    <ion-col size="2" class="ion-padding">
-      <!-- <ion-button color="success" fill="clear" (click)="back()">
-        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
-      </ion-button> -->
-    </ion-col>
+      <ion-col size="8" class="ion-text-center ion-no-padding">
+        <h2>{{ viewTitle }}</h2>
+      </ion-col>
 
-    <ion-col size="8" class="ion-text-center ion-no-padding">
-      <h2>{{ viewTitle }}</h2>
-    </ion-col>
+      <!-- Move forward one screen of the slides -->
+      <ion-col size="2" class="ion-padding">
+        <ion-button color="success" fill="outline" (click)="addEvent()">
+          <ion-icon name="add" slot="icon-only"></ion-icon> Event
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row style="height: 68rem;">
+      <ion-col></ion-col>
+      <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="5">
+        <ion-segment color="success" [(ngModel)]="calendar.mode">
+          <ion-segment-button value="month">
+            <ion-label>Month</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="week">
+            <ion-label>Week</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="day">
+            <ion-label>Day</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+        <ion-row>
+          <ion-col size="2">
+            <ion-button color="success" fill="clear" (click)="back()">
+              <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="8" class="ion-text-center ion-padding-top">
+            <ion-text>{{ viewTitle }}</ion-text>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button color="success" style="float: right;" fill="clear" (click)="next()">
+              <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
 
-    <!-- Move forward one screen of the slides -->
-    <ion-col size="2" class="ion-padding">
-      <ion-button color="success" fill="outline" (click)="addEvent()">
-        <ion-icon name="add" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col></ion-col>
-    <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="5">
-      <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
-        (onTitleChanged)="onViewTitleChanged($event)" [monthviewDisplayEventTemplate]="template">
-      </calendar>
 
-      <ng-template #template let-view="view" let-row="row" let-col="col">
-        <div [class.with-event]="view.dates[row*7+col].events.length">
-          {{view.dates[row*7+col].label}}
-          <div class="indicator-container">
-            <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
+        <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+          (onTitleChanged)="onViewTitleChanged($event)" [monthviewDisplayEventTemplate]="template">
+        </calendar>
+
+        <ng-template #template let-view="view" let-row="row" let-col="col">
+          <div [class.with-event]="view.dates[row*7+col].events.length">
+            {{view.dates[row*7+col].label}}
+            <div class="indicator-container">
+              <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
+            </div>
           </div>
-        </div>
-      </ng-template>
-    </ion-col>
-    <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="5">
-      <ion-list class="ion-no-padding">
-        <ion-list-header color="success" fill="outline" class="sub-blk"> Booked Slots </ion-list-header>
-        <div class="scrollable">
+        </ng-template>
+      </ion-col>
+      <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="5">
+        <ion-list class="ion-no-padding">
+          <ion-list-header color="success" fill="outline" class="sub-blk"> Booked Slots </ion-list-header>
+          <div class="scrollable">
 
-          <ion-item *ngFor="let slot of events;let i = index">
-            <ion-avatar slot="start">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQouHEQNYPAhkC5tRWybXF7mVdgsgLR9axhbu-HsyDQ6FDmv1SYycmjjgIrjH1QeGFnTHE&usqp=CAU" />
-            </ion-avatar>
-            <ion-label>
-              <ion-card>
-                <ion-card-header>
-                  <ion-card-title>Mr. {{ slot.title }}</ion-card-title>
-                  <ion-card-subtitle>Date :- From :- {{ slot.startTime | date: 'dd.MM.yyyy' }} To :- {{ slot.endTime |
-                    date:
-                    'dd.MM.yyyy'
-                    }}</ion-card-subtitle>
-                </ion-card-header>
+            <ion-item *ngFor="let slot of events;let i = index">
+              <ion-avatar slot="start">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQouHEQNYPAhkC5tRWybXF7mVdgsgLR9axhbu-HsyDQ6FDmv1SYycmjjgIrjH1QeGFnTHE&usqp=CAU" />
+              </ion-avatar>
+              <ion-label>
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title class="ion-padding-bottom"><strong> {{ slot.title }}</strong>
+                    </ion-card-title>
+                    <ion-text>Date : <strong> {{ slot.booked_date || slot.startTime | date: 'mediumDate' }} </strong>
+                    </ion-text>
+                    <ion-card-subtitle>Time :
+                      <strong> {{ slot.startTime | date : 'hh.mm' }} - {{ slot.endTime | date : 'hh.mm' }} </strong>
+                    </ion-card-subtitle>
+                  </ion-card-header>
 
-                <ion-card-content>
-                  {{ slot.address }}
-                </ion-card-content>
-              </ion-card>
-            </ion-label>
-          </ion-item>
-          <div *ngIf="events.length == 0" class="ion-text-center no-data-blk">
-            <ion-card-header>
-              <ion-card-title>
-                <ion-icon name="alert-circle-outline"></ion-icon>
-                <h1>
-                  No Slots Booked Yet
-                </h1>
-              </ion-card-title>
-            </ion-card-header>
+                  <ion-card-content>
+                    Address : <strong> {{ slot.address }} </strong>
+                  </ion-card-content>
+                </ion-card>
+              </ion-label>
+            </ion-item>
+            <div *ngIf="events.length == 0" class="ion-text-center no-data-blk">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-icon name="alert-circle-outline"></ion-icon>
+                  <h1>
+                    No Slots Booked Yet
+                  </h1>
+                </ion-card-title>
+              </ion-card-header>
+            </div>
           </div>
-        </div>
-      </ion-list>
-    </ion-col>
-    <ion-col></ion-col>
+        </ion-list>
+      </ion-col>
+      <ion-col></ion-col>
 
-  </ion-row>
+    </ion-row>
+  </div>
+
+  <div class="spin" *ngIf="loading">
+    <ion-spinner color="success" name="circles"></ion-spinner>
+  </div>
 </ion-content>

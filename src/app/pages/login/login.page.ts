@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonSlides } from '@ionic/angular';
+import { AuthService } from 'src/api/auth.service';
 import { PublicApiService } from 'src/api/public_api.service';
 import { TurfApiService } from 'src/api/turf_api.service';
 import { BaseHelper } from 'src/helper/baseHelper';
@@ -30,7 +31,7 @@ export class LoginPage implements OnInit {
   constructor(
     private b: BaseHelper,
     private g: GlobalProvider,
-    private api: TurfApiService,
+    private authService: AuthService,
     public fb: FormBuilder
   ) {
     this.loginForm = this.fb.group({
@@ -61,16 +62,15 @@ export class LoginPage implements OnInit {
     this.slides.lockSwipes(true)
   }
 
-  params: any;
   async login(ev?) {
-    debugger
+    let params: any;
     this.b.loadLoading(true);
     if (ev) {
-      this.params = this.loginForm?.value
+      params = this.loginForm?.value
     } else {
-      this.params = this.adminForm?.value
+      params = this.adminForm?.value
     }
-    (await this.api.turfLogin(this.params)).subscribe(
+    (await this.authService.turfLogin(params)).subscribe(
       async (result) => {
         const r: any = result;
 
@@ -86,9 +86,6 @@ export class LoginPage implements OnInit {
       },
       (error) => {
         console.log(`err?`, error);
-        console.log(`err?`, error);
-        // if(error.error && error.error.message) this.b.toastUp(error.error.message, 2000,
-        //   "danger")
         this.b.loadLoading(false);
       }
     );

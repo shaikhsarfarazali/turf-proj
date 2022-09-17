@@ -4,18 +4,19 @@
     <div class="sub-blck">
       <ion-card>
         <ion-card-header>
-          <h1>{{ userForm ? 'User' : 'Admin' }} Login</h1>
+          <!-- {{ userForm ? 'User' : 'Admin' }}  -->
+          <h1>Login</h1>
         </ion-card-header>
 
         <ion-card-content>
-          <div class="card-btn">
+          <!-- <div class="card-btn">
             <ion-button class="btn" color="{{ userForm ? 'success' : 'light' }}" (click)="prev()">User
               Login
             </ion-button>
             <ion-button class="btn" color="{{ userForm ? 'light' : 'success' }}" (click)="next()">Admin
               Login
             </ion-button>
-          </div>
+          </div> -->
           <ion-slides [options]="slideOpts" #slides>
             <ion-slide class="ion-padding-top">
               <form [formGroup]="loginForm">
@@ -54,7 +55,7 @@
                 <h2 class="head2">Not A Member? <span class="btn link">SignUp Now </span></h2>
               </form>
             </ion-slide>
-            <ion-slide class="ion-padding-top">
+            <!-- <ion-slide class="ion-padding-top">
               <form [formGroup]="adminForm">
                 <ion-grid>
                   <ion-row>
@@ -90,7 +91,7 @@
                 </ion-grid>
                 <h2 class="head2">Not A Member? <span class="btn link">SignUp Now </span></h2>
               </form>
-            </ion-slide>
+            </ion-slide> -->
           </ion-slides>
 
         </ion-card-content>

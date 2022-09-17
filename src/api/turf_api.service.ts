@@ -11,8 +11,6 @@ export class TurfApiService {
 
     url = environment.url + '/public/fetch/';
 
-    credsUrl = environment.url;
-
     constructor(
         public http: HttpClient,
         public g: GlobalProvider,
@@ -35,7 +33,8 @@ export class TurfApiService {
         return this.http.get<any>(this.url + id + '/turf/graphics');
     }
 
-    turfLogin(data) {
-        return this.http.post<any>(this.credsUrl + '/user/login', data);
+    getBookingsById(id) {
+        return this.http.get<any>(this.url + id + '/turf/booked/slots');
     }
+
 }
