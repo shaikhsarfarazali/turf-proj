@@ -30,15 +30,14 @@ export class EventModalPage implements OnInit {
   }
 
   save() {
-    this.event['date'] = this.event.startTime.split('T')[0];
+    this.event['booked_date'] = this.event.startTime.split('T')[0];
     this.event['from'] = this.event.startTime.split('T')[1];
-    this.event['from'] = this.event.from.split('+')[0].slice(0, -3);
+    this.event['booked_from'] = this.event.from.split('+')[0].slice(0, -3);
     this.event['to'] = this.event.endTime.split('T')[1];
-    this.event['to'] = this.event.to.split('+')[0].slice(0, -3);
+    this.event['booked_to'] = this.event.to.split('+')[0].slice(0, -3);
     this.event['turf_id'] = this.turfData.turf_id;
     console.log(this.event)
     this.checkAvailability();
-    this.createBooking();
   }
 
   dismissModal() {
@@ -48,9 +47,10 @@ export class EventModalPage implements OnInit {
   checkAvailability() {
     this.turfService.getAvailability(this.event).subscribe((res) => {
       if (res) {
+        this.createBooking();
         this.modalCtrl.dismiss(this.event);
       } else {
-        this.b.toast('slot not available', 2000, 'warning');
+        this.b.toast('currently slot is not available', 2000, 'warning');
       }
     },
       (error) => {
@@ -67,6 +67,5 @@ export class EventModalPage implements OnInit {
       (error) => {
         throw error
       })
-
   }
 }
