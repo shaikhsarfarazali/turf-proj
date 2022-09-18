@@ -120,19 +120,24 @@ export class RegistrationPage implements OnInit {
     this.b.loadLoading(true);
     if (ev) {
       params = this.form?.value
+      console.log(JSON.stringify(params))
     } else {
       params = this.adminForm?.value
     }
     (await this.authService.turfRegister(params)).subscribe(
-      async (result) => {
-        const r: any = result;
-        console.log(`Registered??`, r);
-        if (r.formFilled) {
+      async (res) => {
+        console.log(res)
+        const r: any = res;
+        if (r.token) {
+          sessionStorage.setItem('userToken', JSON.stringify(r.token));
+          sessionStorage.setItem('userData', JSON.stringify(r.user));
           this.b.setJws(r.token, r.mediaUrl);
-
+          this.navigate('/login')
+          this.b.toast('User Registered Successfully', 3000, 'success');
           this.b.loadLoading(false);
           // this.b.navigateRoot(`/${this.rootPath}`);
         } else {
+          this.b.toast('Invalid User', 2000, 'danger');
         }
       },
       (error) => {
@@ -142,6 +147,10 @@ export class RegistrationPage implements OnInit {
         this.b.loadLoading(false);
       }
     );
+  }
+
+  navigate(path) {
+    this.b.navigate(path);
   }
 
   slideNext() {

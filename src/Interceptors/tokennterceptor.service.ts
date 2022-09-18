@@ -3,12 +3,14 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse
 import { Observable, of, throwError } from "rxjs";
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable()
 export class Tokeninterceptor implements HttpInterceptor {
-    constructor(private router: Router) { }
+    constructor(private router: Router, private storage: Storage) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token: string = '2|x0spPHta02EuK13qjB7HZaYdcwZE5zvMejTuHrwu';
+        this.storage.create();
+        let token: string = JSON.parse(sessionStorage.getItem('userToken'));
         req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
 
         return next.handle(req).pipe(

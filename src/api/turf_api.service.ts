@@ -37,4 +37,7 @@ export class TurfApiService {
         return this.http.get<any>(this.url + id + '/turf/booked/slots');
     }
 
+    getAvailability(ev) {
+        return this.http.post<any>(this.url + ev.turf_id + '/turf/available/' + ev.date + '/' + ev.from + '/' + ev.to, null);
+    }
 }

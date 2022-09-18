@@ -74,9 +74,10 @@ export class TurfBookingPage implements OnInit {
   async addEvent() {
     let modal = await this.modalCtrl.create({
       component: EventModalPage,
-      cssClass: 'my-custom-class',
+      cssClass: 'add-event-modal',
       componentProps: {
-        'selectedDay': this.selectedBy
+        'selectedDay': this.selectedBy,
+        'turfData': this.turfData
       },
       swipeToClose: false,
     });

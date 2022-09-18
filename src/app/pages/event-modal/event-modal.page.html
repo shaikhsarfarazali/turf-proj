@@ -1,15 +1,14 @@
-<ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Select Your Slot</ion-title>
-    <ion-buttons slot="start">
-      <ion-button (click)="dismissModal()">
-        <ion-icon slot="end" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-header>
+    <ion-toolbar color="success">
+      <ion-title>Select Your Slot</ion-title>
+      <ion-buttons slot="start">
+        <ion-button (click)="dismissModal()">
+          <ion-icon slot="end" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   <ion-list>
     <ion-item>
       <ion-label color="dark" position="floating">Your Name</ion-label>
@@ -19,30 +18,25 @@
       <ion-label color="dark" position="floating">Your Address</ion-label>
       <ion-input tpye="text" [(ngModel)]="event.address"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="showPicker =! showPicker">
       <ion-label color="dark">Start</ion-label>
-      <ion-input value="{{ event.startTime | date: 'dd.MM.yyyy' }}" id="startDate" class="ion-text-end"></ion-input>
-      <ion-popover trigger="startDate" size="cover">
-        <ng-template>
-          <ion-datetime color="success" [showDefaultButtons]="true" displayFormat="MM/DD/YYYY HH:mm" presentation="date"
-            [(ngModel)]="event.startTime" [min]="minDate">
-          </ion-datetime>
-        </ng-template>
-      </ion-popover>
+      <ion-text slot="end">
+        {{ event.startTime | date: 'medium' }}
+      </ion-text>
     </ion-item>
+    <ion-datetime color="success" size="cover" hourCycle="h12" displayFormat="MM/DD/YYYY HH:mm"
+      [(ngModel)]="event.startTime" [min]="minDate" *ngIf="showPicker">
+    </ion-datetime>
 
-    <ion-item>
+    <ion-item (click)="showPickerEnd =! showPickerEnd">
       <ion-label color="dark">End</ion-label>
-      <ion-input value="{{ event.endTime | date: 'dd.MM.yyyy' }}" id="endDate" class="ion-text-end"></ion-input>
-      <ion-popover trigger="endDate" size="cover">
-        <ng-template>
-          <ion-datetime color="success" [showDefaultButtons]="true" displayFormat="MM/DD/YYYY HH:mm" presentation="date"
-            [(ngModel)]="event.endTime" [min]="minDate">
-          </ion-datetime>
-        </ng-template>
-      </ion-popover>
+      <ion-text slot="end">
+        {{ event.endTime | date: 'medium' }}
+      </ion-text>
     </ion-item>
-
+    <ion-datetime color="success" size="cover" hourCycle="h12" displayFormat="MM/DD/YYYY HH:mm"
+      [(ngModel)]="event.endTime" [min]="minDate" *ngIf="showPickerEnd">
+    </ion-datetime>
     <ion-item>
       <ion-label color="dark">All Day?</ion-label>
       <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>

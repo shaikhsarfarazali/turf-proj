@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
+import { Validator } from 'src/api/api_base.service';
 import { AuthService } from 'src/api/auth.service';
 import { PublicApiService } from 'src/api/public_api.service';
 import { TurfApiService } from 'src/api/turf_api.service';
@@ -32,16 +34,10 @@ export class LoginPage implements OnInit {
     private b: BaseHelper,
     private g: GlobalProvider,
     private authService: AuthService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private router: Router
   ) {
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\-]+$/)]],
-      usPassword: ['', [Validators.required, Validators.maxLength(100)]],
-    });
-    this.adminForm = this.fb.group({
-      email: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
-    });
+
   }
 
   get username() {
@@ -59,6 +55,14 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(Validator.name)]],
+      usPassword: ['', [Validators.required, Validators.maxLength(100)]],
+    });
+    this.adminForm = this.fb.group({
+      email: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(Validator.email)]],
+      password: ['', [Validators.required, Validators.maxLength(100)]],
+    });
     this.slides.lockSwipes(true)
   }
 
@@ -76,9 +80,9 @@ export class LoginPage implements OnInit {
 
         this.b.loadLoading(false);
         console.log(`login??`, r);
-        if (r.ok) {
+        if (r.token) {
           this.b.setJws(r.token, r.mediaUrl);
-
+          this.navigate('/home')
           // this.b.navigateRoot(`/${this.rootPath}`);
         } else {
           this.b.toast(r.error, 2000, 'danger');
@@ -89,6 +93,10 @@ export class LoginPage implements OnInit {
         this.b.loadLoading(false);
       }
     );
+  }
+
+  navigate(path) {
+    this.b.navigate(path);
   }
 
   next() {
