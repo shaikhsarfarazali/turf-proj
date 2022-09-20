@@ -45,7 +45,7 @@ export class TurfBookingPage implements OnInit {
           el['turf_booking_id'] = el.turf_booking_id;
           el['allDay'] = false;
           el['turf_id'] = el.turf_id;
-          el['title'] = 'Shaikh Sarfaraz Ali';
+          el['title'] = 'IGNITECH';
           this.addBookings(el);
         }), this.loading = false) : '';
     },
