@@ -81,7 +81,6 @@ export class LoginPage implements OnInit {
       params = this.adminForm?.value
       name = "adminLogin"
     }
-    debugger
     (await this.authService[name](params)).subscribe(
       async (result) => {
         const r: any = result;
