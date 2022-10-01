@@ -40,8 +40,8 @@ export class LoginPage implements OnInit {
 
   }
 
-  get username() {
-    return this.loginForm.get('username');
+  get usEmail() {
+    return this.loginForm.get('usEmail');
   }
   get usPassword() {
     return this.loginForm.get('usPassword');
@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(Validator.name)]],
+      usEmail: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(Validator.email)]],
       usPassword: ['', [Validators.required, Validators.maxLength(100)]],
     });
     this.adminForm = this.fb.group({
@@ -68,13 +68,21 @@ export class LoginPage implements OnInit {
 
   async login(ev?) {
     let params: any;
+    let name:string;
     this.b.loadLoading(true);
     if (ev) {
-      params = this.loginForm?.value
+      let data = this.loginForm?.value
+      params = {
+        email: data.usEmail,
+        password: data.usPassword,
+      }
+      name = "userLogin"
     } else {
       params = this.adminForm?.value
+      name = "adminLogin"
     }
-    (await this.authService.turfLogin(params)).subscribe(
+    debugger
+    (await this.authService[name](params)).subscribe(
       async (result) => {
         const r: any = result;
 

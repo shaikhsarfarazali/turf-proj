@@ -16,11 +16,19 @@ export class AuthService {
         public g: GlobalProvider,
         private b: BaseHelper
     ) { }
-    turfLogin(data) {
+    userLogin(data) {
         return this.http.post<any>(this.url + '/user/login', data);
     }
 
-    turfRegister(data) {
+    userRegister(data) {
         return this.http.post<any>(this.url + '/user/register', data);
+    }
+
+    adminLogin(data) {
+        return this.http.post<any>(this.url + 'turf/user/login', data);
+    }
+
+    adminRegister(data) {
+        return this.http.post<any>(this.url + 'turf/user/register', data);
     }
 }

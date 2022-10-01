@@ -68,8 +68,8 @@ export class RegistrationPage implements OnInit {
   get adConfirmPassword() {
     return this.adminForm.get('adConfirmPassword');
   }
-  get adTurfName() {
-    return this.adminForm.get('adTurfName');
+  get adMobile_no() {
+    return this.adminForm.get('adMobile_no');
   }
   get adTnc() {
     return this.adminForm.get('adTnc');
@@ -90,8 +90,6 @@ export class RegistrationPage implements OnInit {
       confirmPassword: ['', [Validators.required]],
       mobile_no: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(Validator.phone)]],
       tnc: [false]
-      // contact: ['', [Validators.required, Validators.maxLength(10)]],
-      // username: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\-]+$/)]],
     }, {
       validator: PswrdValidator('password', 'confirmPassword')
     });
@@ -102,10 +100,8 @@ export class RegistrationPage implements OnInit {
       adEmail: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(Validator.email)]],
       adPassword: ['', [Validators.required, Validators.maxLength(100)]],
       adConfirmPassword: ['', [Validators.required, Validators.maxLength(100)]],
-      adTurfName: ['', [Validators.required, Validators.maxLength(100)]],
+      adMobile_no: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(Validator.phone)]],
       adTnc: [false]
-      // contact: ['', [Validators.required, Validators.maxLength(10)]],
-      // username: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\-]+$/)]],
     });
   }
 
@@ -117,14 +113,25 @@ export class RegistrationPage implements OnInit {
 
   async register(ev) {
     let params: any;
+    let name:string;
     this.b.loadLoading(true);
     if (ev) {
       params = this.form?.value
-      console.log(JSON.stringify(params))
+      name="userRegister";
     } else {
-      params = this.adminForm?.value
+      let data = this.adminForm?.value
+      params = {
+        id:0,
+        name: data.adName,
+        email: data.adEmail,
+        password: data.adPassword,
+        confirmPassword: data.adConfirmPassword,
+        mobile_no: data.adMobile_no,
+        tnc: data.adTnc
+      }
+      name="adminRegister";
     }
-    (await this.authService.turfRegister(params)).subscribe(
+    (await this.authService[name](params)).subscribe(
       async (res) => {
         console.log(res)
         const r: any = res;
