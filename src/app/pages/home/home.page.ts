@@ -9,6 +9,7 @@ import { BaseHelper } from 'src/helper/baseHelper';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  isSearchBar: boolean;
   slideOptsOne = {
     initialSlide: 0,
     slidesPerView: 1,

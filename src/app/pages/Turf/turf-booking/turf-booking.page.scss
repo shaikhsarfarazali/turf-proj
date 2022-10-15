@@ -47,3 +47,11 @@
   .add-event{
     background-color: aqua;
   }
+
+
+  @media screen and(max-width:1000px){
+    .sub-blk{
+        border: none;
+        margin-top: 5rem;
+    }
+}

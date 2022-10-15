@@ -11,6 +11,7 @@ import { BaseHelper } from 'src/helper/baseHelper';
 export class HeaderComponent implements OnInit {
   @Input('title') title: any;
   pageTitle: Observable<object>;
+  isSearchBar: boolean;
 
   constructor(private b: BaseHelper) {
   }

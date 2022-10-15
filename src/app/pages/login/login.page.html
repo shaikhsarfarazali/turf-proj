@@ -51,7 +51,6 @@
 
                   <ion-button class="btn submit-btn" color="success" (click)="login('true')">Login</ion-button>
                 </ion-grid>
-                <h2 class="head2">Not A Member? <span class="btn link">SignUp Now </span></h2>
               </form>
             </ion-slide>
             <ion-slide class="ion-padding-top">
@@ -88,10 +87,12 @@
 
                   <ion-button class="btn submit-btn" color="success" (click)="login()">Login</ion-button>
                 </ion-grid>
-                <h2 class="head2">Not A Member? <span class="btn link">SignUp Now </span></h2>
               </form>
             </ion-slide>
           </ion-slides>
+          <p class="ion-text-center">Not A Member? <span class="btn link" (click)="navigate('registration')">SignUp Now
+            </span>
+          </p>
 
         </ion-card-content>
       </ion-card>

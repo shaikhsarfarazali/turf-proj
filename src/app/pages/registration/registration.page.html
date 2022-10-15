@@ -1,193 +1,212 @@
 <app-header></app-header>
 <ion-content class="ion-text-center bg-img">
-  <ion-card class="crd-blk">
-    <ion-card-header>
-      <h1>{{ userForm ? 'User' : 'Admin' }} Registration</h1>
-    </ion-card-header>
+  <div class="main-blck">
+    <div class="sub-blck">
+      <ion-card>
+        <ion-card-header>
+          <h1>{{ userForm ? 'User' : 'Admin' }} Registration</h1>
+        </ion-card-header>
 
-    <div class="card-btn">
-      <ion-button class="btn" color="{{ userForm ? 'success' : 'light' }}" (click)="slidePrev()">User
-        Registration
-      </ion-button>
-      <ion-button class="btn" color="{{ userForm ? 'light' : 'success' }}" (click)="slideNext()">Admin
-        Registration
-      </ion-button>
-    </div>
-    <swiper [config]="config" #swiper>
-      <ng-template swiperSlide>
-        <form [formGroup]="form" (ngSubmit)="register('true')">
-          <ion-grid>
-            <ion-row class="ion-justify-content-center">
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="text" placeholder="Please Enter Your Name" formControlName="name" name="name">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start" *ngIf="name.invalid && (name.dirty || name.touched)">
-                  <small class="error" *ngIf="name.errors?.required">Name is
-                    required</small>
-                  <small class="error" *ngIf="name.errors?.pattern">Invalid Name</small>
-                </div>
-              </ion-col>
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="text" placeholder="Please Enter Your Email" formControlName="email" name="email">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start" *ngIf="email.invalid && (email.dirty || email.touched)">
-                  <small class="error" *ngIf="email.errors?.required">Email is
-                    required</small>
-                  <small class="error" *ngIf="email.errors?.pattern">Invalid Email</small>
-                </div>
-              </ion-col>
 
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="password" placeholder="Please Enter Your Password" formControlName="password">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start">
-
-                  <div class="ion-text-start" *ngIf="password.invalid && (password.dirty || password.touched)">
-                    <small class="error" *ngIf="password.errors?.required">Password is required</small>
-                  </div>
-                </div>
-              </ion-col>
-
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="password" placeholder="Please Enter Your Confirm Password"
-                    formControlName="confirmPassword">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start">
-
-                  <div class="ion-text-start"
-                    *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
-                    <small class="error" *ngIf="confirmPassword.errors?.required">Confirm Password is
-                      required</small>
-                    <small class="error" *ngIf="confirmPassword.errors.confirmedValidator">Password and Confirm Password
-                      must be match.</small>
-                  </div>
-                </div>
-              </ion-col>
-
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="text" placeholder="Please Enter Your Mobile No." formControlName="mobile_no"
-                    maxlength="10">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start">
-
-                  <div class="ion-text-start" *ngIf="mobile_no.invalid && (mobile_no.dirty || mobile_no.touched)">
-                    <small class="error" *ngIf="mobile_no.errors?.required">Mobile No is
-                      required</small>
-                    <small class="error" *ngIf="mobile_no.errors?.pattern || mobile_no.errors?.minlength">Mobile No is
-                      Invalid</small>
-                  </div>
-                </div>
-              </ion-col>
-
-              <!-- <ion-col size="10" class="ion-padding ion-text-start">
-                <ion-checkbox color="success" formControlName="tnc"></ion-checkbox> &nbsp;
-                <ion-label>I accept all terms & conditions</ion-label>
-              </ion-col> -->
-            </ion-row>
-
-            <ion-button type="submit" class="btn submit-btn" color="success" [disabled]="form.invalid">Sign Up
+        <ion-card-content>
+          <div class="card-btn">
+            <ion-button class="btn" color="{{ userForm ? 'success' : 'light' }}" (click)="prev()">User
+              Registration
             </ion-button>
-          </ion-grid>
-          <p class="ion-text-center">Already have an account? <span class="btn link">Login Now </span></p>
-        </form>
-      </ng-template>
+            <ion-button class="btn" color="{{ userForm ? 'light' : 'success' }}" (click)="next()">Admin
+              Registration
+            </ion-button>
+          </div>
+          <ion-slides [options]="slideOpts" #slides>
 
-      <ng-template swiperSlide>
-        <form [formGroup]="adminForm" (ngSubmit)="register()">
-          <ion-grid>
-            <ion-row class="ion-justify-content-center">
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="text" placeholder="Please Enter Your Name" formControlName="adName" name="adName">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start" *ngIf="adName.invalid && (adName.dirty || adName.touched)">
-                  <small class="error" *ngIf="adName.errors?.required">Name is
-                    required</small>
-                  <small class="error" *ngIf="adName.errors?.pattern">Invalid Name</small>
-                </div>
-              </ion-col>
+            <ion-slide class="ion-padding-top">
+              <form [formGroup]="form" (ngSubmit)="register('true')">
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="text" placeholder="Please Enter Your Name" formControlName="name" name="name">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start" *ngIf="name.invalid && (name.dirty || name.touched)">
+                        <small class="error" *ngIf="name.errors?.required">Name is
+                          required</small>
+                        <small class="error" *ngIf="name.errors?.pattern">Invalid Name</small>
+                      </div>
+                    </ion-col>
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="text" placeholder="Please Enter Your Email" formControlName="email"
+                          name="email">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start" *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <small class="error" *ngIf="email.errors?.required">Email is
+                          required</small>
+                        <small class="error" *ngIf="email.errors?.pattern">Invalid Email</small>
+                      </div>
+                    </ion-col>
 
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="text" placeholder="Please Enter Your Email" formControlName="adEmail" name="adEmail">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start" *ngIf="adEmail.invalid && (adEmail.dirty || adEmail.touched)">
-                  <small class="error" *ngIf="adEmail.errors?.required">Email is
-                    required</small>
-                  <small class="error" *ngIf="adEmail.errors?.pattern">Invalid Email</small>
-                </div>
-              </ion-col>
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="password" placeholder="Please Enter Your Password" formControlName="password">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start">
 
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="password" placeholder="Please Enter Your Password" formControlName="adPassword">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start">
+                        <div class="ion-text-start" *ngIf="password.invalid && (password.dirty || password.touched)">
+                          <small class="error" *ngIf="password.errors?.required">Password is required</small>
+                        </div>
+                      </div>
+                    </ion-col>
 
-                  <div class="ion-text-start" *ngIf="adPassword.invalid && (adPassword.dirty || adPassword.touched)">
-                    <small class="error" *ngIf="adPassword.errors?.required">Password is required</small>
-                  </div>
-                </div>
-              </ion-col>
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="password" placeholder="Please Enter Your Confirm Password"
+                          formControlName="confirmPassword">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start">
 
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="password" placeholder="Please Enter Your Confirm Password"
-                    formControlName="adConfirmPassword">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start">
+                        <div class="ion-text-start"
+                          *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                          <small class="error" *ngIf="confirmPassword.errors?.required">Confirm Password is
+                            required</small>
+                          <small class="error" *ngIf="confirmPassword.errors.confirmedValidator">Password and Confirm
+                            Password
+                            must be match.</small>
+                        </div>
+                      </div>
+                    </ion-col>
 
-                  <div class="ion-text-start"
-                    *ngIf="adConfirmPassword.invalid && (adConfirmPassword.dirty || adConfirmPassword.touched)">
-                    <small class="error" *ngIf="adConfirmPassword.errors?.required">Confirm Password is
-                      required</small>
-                  </div>
-                </div>
-              </ion-col>
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="text" placeholder="Please Enter Your Mobile No." formControlName="mobile_no"
+                          maxlength="10">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start">
 
-              <ion-col size="10">
-                <ion-item>
-                  <ion-input type="text" placeholder="Please Enter Your Mobile No." formControlName="adMobile_no"
-                  name="adMobile_no" maxlength="10">
-                  </ion-input>
-                </ion-item>
-                <div class="ion-text-start">
+                        <div class="ion-text-start" *ngIf="mobile_no.invalid && (mobile_no.dirty || mobile_no.touched)">
+                          <small class="error" *ngIf="mobile_no.errors?.required">Mobile No is
+                            required</small>
+                          <small class="error" *ngIf="mobile_no.errors?.pattern || mobile_no.errors?.minlength">Mobile
+                            No
+                            is
+                            Invalid</small>
+                        </div>
+                      </div>
+                    </ion-col>
 
-                  <div class="ion-text-start" *ngIf="adMobile_no.invalid && (adMobile_no.dirty || adMobile_no.touched)">
-                    <small class="error" *ngIf="adMobile_no.errors?.required">Mobile No is
-                      required</small>
-                    <small class="error" *ngIf="adMobile_no.errors?.pattern || adMobile_no.errors?.minlength">Mobile No is
-                      Invalid</small>
-                  </div>
-                </div>
-              </ion-col>
+                    <!-- <ion-col size="12" class="ion-padding ion-text-start">
+                    <ion-checkbox color="success" formControlName="tnc"></ion-checkbox> &nbsp;
+                    <ion-label>I accept all terms & conditions</ion-label>
+                  </ion-col> -->
+                  </ion-row>
 
-              <!-- <ion-col size="10" class="ion-padding ion-text-start">
-                <ion-checkbox color="success" formControlName="adTnc"></ion-checkbox> &nbsp;
-                <ion-label>I accept all terms & conditions</ion-label>
-              </ion-col> -->
-            </ion-row>
+                  <ion-button type="submit" class="btn submit-btn" color="success" [disabled]="form.invalid">Sign Up
+                  </ion-button>
+                </ion-grid>
+              </form>
+            </ion-slide>
 
-            <ion-button type="submit" class="btn submit-btn" color="success" [disabled]="adminForm.invalid">Sign
-              Up</ion-button>
-          </ion-grid>
-          <p class="ion-text-center">Already have an account? <span class="btn link">Login Now </span></p>
-        </form>
-      </ng-template>
-    </swiper>
-  </ion-card>
+            <ion-slide class="ion-padding-top">
+              <form [formGroup]="adminForm" (ngSubmit)="register()">
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="text" placeholder="Please Enter Your Name" formControlName="adName"
+                          name="adName">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start" *ngIf="adName.invalid && (adName.dirty || adName.touched)">
+                        <small class="error" *ngIf="adName.errors?.required">Name is
+                          required</small>
+                        <small class="error" *ngIf="adName.errors?.pattern">Invalid Name</small>
+                      </div>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="text" placeholder="Please Enter Your Email" formControlName="adEmail"
+                          name="adEmail">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start" *ngIf="adEmail.invalid && (adEmail.dirty || adEmail.touched)">
+                        <small class="error" *ngIf="adEmail.errors?.required">Email is
+                          required</small>
+                        <small class="error" *ngIf="adEmail.errors?.pattern">Invalid Email</small>
+                      </div>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="password" placeholder="Please Enter Your Password"
+                          formControlName="adPassword">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start">
+
+                        <div class="ion-text-start"
+                          *ngIf="adPassword.invalid && (adPassword.dirty || adPassword.touched)">
+                          <small class="error" *ngIf="adPassword.errors?.required">Password is required</small>
+                        </div>
+                      </div>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="password" placeholder="Please Enter Your Confirm Password"
+                          formControlName="adConfirmPassword">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start">
+
+                        <div class="ion-text-start"
+                          *ngIf="adConfirmPassword.invalid && (adConfirmPassword.dirty || adConfirmPassword.touched)">
+                          <small class="error" *ngIf="adConfirmPassword.errors?.required">Confirm Password is
+                            required</small>
+                        </div>
+                      </div>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input type="text" placeholder="Please Enter Your Mobile No." formControlName="adMobile_no"
+                          name="adMobile_no" maxlength="10">
+                        </ion-input>
+                      </ion-item>
+                      <div class="ion-text-start">
+
+                        <div class="ion-text-start"
+                          *ngIf="adMobile_no.invalid && (adMobile_no.dirty || adMobile_no.touched)">
+                          <small class="error" *ngIf="adMobile_no.errors?.required">Mobile No is
+                            required</small>
+                          <small class="error"
+                            *ngIf="adMobile_no.errors?.pattern || adMobile_no.errors?.minlength">Mobile
+                            No is
+                            Invalid</small>
+                        </div>
+                      </div>
+                    </ion-col>
+
+                    <!-- <ion-col size="12" class="ion-padding ion-text-start">
+                    <ion-checkbox color="success" formControlName="adTnc"></ion-checkbox> &nbsp;
+                    <ion-label>I accept all terms & conditions</ion-label>
+                  </ion-col> -->
+                  </ion-row>
+
+                  <ion-button type="submit" class="btn submit-btn" color="success" [disabled]="adminForm.invalid">Sign
+                    Up</ion-button>
+                </ion-grid>
+              </form>
+            </ion-slide>
+          </ion-slides>
+          <p class="ion-text-center">Already have an account? <span class="btn link" (click)="navigate('login')">Login
+              Now </span></p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

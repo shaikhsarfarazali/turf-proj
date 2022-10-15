@@ -1,49 +1,21 @@
-
-.swiper-slide{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+.submit-btn{
+    width: 100%;
 }
 
-.crd-blk{
-    border-radius: 8%;
-    width: 50%;
-    border: 2px solid;
-    margin: auto;
-    // ion-card-header{
-    //     padding-top: 30px;
-    //     text-align: center;
-    // }
-    .card-btn{
-        text-align: center;
-        border: 1px solid #6666667d;
-        ion-button{
-            width: 48%;
+.error{
+    color:#cf3c4f;
+}
+
+ion-item{
+    border: 1px solid #6666667d;
+}
+
+ion-slides {
+    form{
+        width: 100%;
+        .head2{
+            padding-top: 2rem;
         }
-    }
-    ion-item{
-        border: 1px solid #6666667d;
-    }
-    p{
-        font-size: larger;
-        font-weight: 700;
-    }
-
-    .link{
-        color: #28ba62;
-    }
-
-    .link:hover {
-        text-decoration: underline;
-    }
-
-    .submit-btn{
-        width: 85%;
-    }
-    
-    .error{
-        color:#cf3c4f;
     }
 }
 @media screen and (max-width: 706px) {

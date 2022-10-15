@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { map, catchError } from 'rxjs/operators';
-import { domain } from 'src/environments/environment';
+import { domain } from 'src/environments/baseEnv';
 import { APIBaseService } from './api_base.service';
 
 @Injectable({

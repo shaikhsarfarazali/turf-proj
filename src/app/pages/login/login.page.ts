@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import { Validator } from 'src/api/api_base.service';
 import { AuthService } from 'src/api/auth.service';
-import { PublicApiService } from 'src/api/public_api.service';
-import { TurfApiService } from 'src/api/turf_api.service';
 import { BaseHelper } from 'src/helper/baseHelper';
 import { GlobalProvider } from 'src/helper/global';
 
@@ -35,10 +33,9 @@ export class LoginPage implements OnInit {
     private g: GlobalProvider,
     private authService: AuthService,
     public fb: FormBuilder,
-    private router: Router
-  ) {
-
-  }
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   get usEmail() {
     return this.loginForm.get('usEmail');
@@ -55,6 +52,16 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params.token) {
+        let token = { token: params.token }
+        this.authService.verifyToken(token).subscribe((res) => {
+          if (res) {
+            this.b.toast('User Verified Successfully, Please Login', 3000, 'success');
+          }
+        })
+      }
+    })
     this.loginForm = this.fb.group({
       usEmail: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(Validator.email)]],
       usPassword: ['', [Validators.required, Validators.maxLength(100)]],
@@ -68,7 +75,7 @@ export class LoginPage implements OnInit {
 
   async login(ev?) {
     let params: any;
-    let name:string;
+    let name: string;
     this.b.loadLoading(true);
     if (ev) {
       let data = this.loginForm?.value
@@ -96,6 +103,7 @@ export class LoginPage implements OnInit {
         }
       },
       (error) => {
+        this.b.toast(error?.error['message'][0], 2000, 'danger');
         console.log(`err?`, error);
         this.b.loadLoading(false);
       }
@@ -113,7 +121,7 @@ export class LoginPage implements OnInit {
     this.slides.lockSwipes(true)
   }
 
-  prev(ev) {
+  prev(ev?) {
     this.slides.lockSwipes(false)
     this.userForm = true;
     this.slides.slidePrev();

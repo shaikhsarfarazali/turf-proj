@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseHelper } from 'src/helper/baseHelper';
 import { GlobalProvider } from 'src/helper/global';
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/baseEnv';
 
 @Injectable({
     providedIn: 'root',
@@ -38,6 +38,6 @@ export class TurfApiService {
     }
 
     getAvailability(ev) {
-        return this.http.post<any>(this.url + ev.turf_id + '/turf/available/' + ev.date + '/' + ev.from + '/' + ev.to, null);
+        return this.http.post<any>(this.url + ev.turf_id + '/turf/available/' + ev.booked_date + '/' + ev.booked_from + '/' + ev.booked_to, null);
     }
 }

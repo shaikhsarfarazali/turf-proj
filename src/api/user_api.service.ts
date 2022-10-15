@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseHelper } from 'src/helper/baseHelper';
 import { GlobalProvider } from 'src/helper/global';
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/baseEnv';
 
 @Injectable({
     providedIn: 'root',

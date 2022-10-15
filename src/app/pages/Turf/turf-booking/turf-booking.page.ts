@@ -11,7 +11,7 @@ import { EventModalPage } from '../../event-modal/event-modal.page';
 })
 export class TurfBookingPage implements OnInit {
   @ViewChild(CalendarComponent) myCal: CalendarComponent
-  calendar = {
+  calendar: any = {
     mode: 'month',
     currentDate: new Date(),
   }
@@ -69,7 +69,6 @@ export class TurfBookingPage implements OnInit {
   removeEvents() {
     this.eventSource = [];
   }
-
 
   async addEvent() {
     let modal = await this.modalCtrl.create({

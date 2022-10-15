@@ -37,10 +37,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/Turf/turf-booking/turf-booking.module').then(m => m.TurfBookingPageModule)
   },
   {
-    path: 'test',
-    loadChildren: () => import('./pages/test/test.module').then(m => m.TestPageModule)
-  },
-  {
     path: 'event-modal',
     loadChildren: () => import('./pages/event-modal/event-modal.module').then(m => m.EventModalPageModule)
   },

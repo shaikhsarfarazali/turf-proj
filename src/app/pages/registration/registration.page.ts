@@ -1,33 +1,24 @@
-import { AfterContentChecked, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonSlides } from '@ionic/angular';
 import { Validator } from 'src/api/api_base.service';
 import { AuthService } from 'src/api/auth.service';
-import { PublicApiService } from 'src/api/public_api.service';
 import { BaseHelper } from 'src/helper/baseHelper';
 import { GlobalProvider } from 'src/helper/global';
 import { PswrdValidator } from 'src/helper/pswrd.validator';
-import SwiperCore, { Navigation, Pagination, EffectCube, A11y, SwiperOptions, EffectCards, EffectCoverflow } from 'swiper';
-import { SwiperComponent } from 'swiper/angular';
-
-// install Swiper modules
-SwiperCore.use([Navigation, Pagination, EffectCube, EffectCoverflow, A11y]);
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.page.html',
   styleUrls: ['./registration.page.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class RegistrationPage implements OnInit {
-  @ViewChild('swiper', { static: false }) swiper: SwiperComponent;
-  // '"slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards"'.
-  config: SwiperOptions = {
-    slidesPerView: 1,
-    spaceBetween: 50,
-    pagination: false,
-    allowTouchMove: false,
-    enabled: false
-    // effect: 'creative',
+  @ViewChild('slides', { static: true }) slides: IonSlides;
+  // slider
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    onlyExternal: false,
   };
 
   userForm: boolean = true;
@@ -106,22 +97,19 @@ export class RegistrationPage implements OnInit {
   }
 
   ngAfterContentChecked(): void {
-    if (this.swiper) {
-      this.swiper.updateSwiper({});
-    }
   }
 
-  async register(ev) {
+  async register(ev?) {
     let params: any;
-    let name:string;
+    let name: string;
     this.b.loadLoading(true);
     if (ev) {
       params = this.form?.value
-      name="userRegister";
+      name = "userRegister";
     } else {
       let data = this.adminForm?.value
       params = {
-        id:0,
+        id: 0,
         name: data.adName,
         email: data.adEmail,
         password: data.adPassword,
@@ -129,18 +117,18 @@ export class RegistrationPage implements OnInit {
         mobile_no: data.adMobile_no,
         tnc: data.adTnc
       }
-      name="adminRegister";
+      name = "adminRegister";
     }
     (await this.authService[name](params)).subscribe(
       async (res) => {
-        console.log(res)
         const r: any = res;
         if (r.token) {
-          sessionStorage.setItem('userToken', JSON.stringify(r.token));
-          sessionStorage.setItem('userData', JSON.stringify(r.user));
+          localStorage.setItem('userToken', JSON.stringify(r.token));
+          localStorage.setItem('userData', JSON.stringify(r.user));
           this.b.setJws(r.token, r.mediaUrl);
           this.navigate('/login')
-          this.b.toast('User Registered Successfully', 3000, 'success');
+          // this.b.toast('User Registered Successfully', 3000, 'success');
+          this.b.toast('Verification Email is send please verify', 4000, 'success');
           this.b.loadLoading(false);
           // this.b.navigateRoot(`/${this.rootPath}`);
         } else {
@@ -160,12 +148,17 @@ export class RegistrationPage implements OnInit {
     this.b.navigate(path);
   }
 
-  slideNext() {
+  next() {
+    this.slides.lockSwipes(false)
     this.userForm = false;
-    this.swiper.swiperRef.slideNext(100);
+    this.slides.slideNext();
+    this.slides.lockSwipes(true)
   }
-  slidePrev() {
+
+  prev(ev?) {
+    this.slides.lockSwipes(false)
     this.userForm = true;
-    this.swiper.swiperRef.slidePrev(100);
+    this.slides.slidePrev();
+    this.slides.lockSwipes(true)
   }
 }

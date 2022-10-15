@@ -88,7 +88,7 @@ export class BaseHelper {
   async initLoadLoading() {
     this.gLoading = await this.loadingCtrl.create({
       message: 'Please Wait...',
-      duration: 5000,
+      duration: 1000,
     });
   }
 

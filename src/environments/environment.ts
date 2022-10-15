@@ -8,10 +8,8 @@ export const environment = {
   url: 'http://localhost:8000/api'
 };
 
-export const ns = '';
 // export const domainRaw = 'http://localhost:80/turf/apis';
-export const domainRaw = 'https://turf-test-api.ignitech.in/api';
-export const domain = `${domainRaw}${ns}`;
+
 
 /*
  * For easier debugging in development mode, you can import the following file

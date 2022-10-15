@@ -13,6 +13,10 @@ import { BaseHelper } from 'src/helper/baseHelper';
 })
 export class EventModalPage implements OnInit {
   @Input() turfData: any;
+
+  showPickerEnd: boolean;
+  showPicker: boolean;
+
   event: any = {
     startTime: new Date().toISOString(),
     endTime: new Date().toISOString(),
@@ -46,7 +50,7 @@ export class EventModalPage implements OnInit {
 
   checkAvailability() {
     this.turfService.getAvailability(this.event).subscribe((res) => {
-      if (res) {
+      if (res.available) {
         this.createBooking();
         this.modalCtrl.dismiss(this.event);
       } else {

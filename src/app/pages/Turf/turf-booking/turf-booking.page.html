@@ -19,20 +19,19 @@
       <ion-col size="2" class="ion-padding">
       </ion-col>
 
-      <ion-col size="8" class="ion-text-center ion-no-padding">
+      <ion-col size="8" size-xs="6" size-sm="6" size-md="6" class="ion-text-center ion-no-padding">
         <h2>{{ viewTitle }}</h2>
       </ion-col>
 
       <!-- Move forward one screen of the slides -->
-      <ion-col size="2" class="ion-padding">
+      <ion-col size="2" size-xs="4" size-sm="4" size-md="4" class="ion-padding">
         <ion-button color="success" fill="outline" (click)="addEvent()">
           <ion-icon name="add" slot="icon-only"></ion-icon> Event
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row style="height: 68rem;">
-      <ion-col></ion-col>
-      <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="5">
+      <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="6">
         <ion-segment color="success" [(ngModel)]="calendar.mode">
           <ion-segment-button value="month">
             <ion-label>Month</ion-label>
@@ -74,20 +73,19 @@
           </div>
         </ng-template>
       </ion-col>
-      <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="5">
+      <ion-col class="sub-blk" size-xs="12" size-sm="12" size-md="12" size-lg="6">
         <ion-list class="ion-no-padding">
           <ion-list-header color="success" fill="outline" class="sub-blk"> Booked Slots </ion-list-header>
           <div class="scrollable">
 
             <ion-item *ngFor="let slot of events;let i = index">
               <ion-avatar slot="start">
-                <img
-                  src="../../../../assets/icon/ignitech.png" />
+                <img src="../../../../assets/icon/ignitech.png" />
               </ion-avatar>
               <ion-label>
                 <ion-card>
                   <ion-card-header>
-                    <ion-card-title class="ion-padding-bottom"><strong> {{ slot.title }}</strong>
+                    <ion-card-title class="ion-padding-bottom"><strong> IGNITECH</strong>
                     </ion-card-title>
                     <ion-text>Date : <strong> {{ slot.booked_date || slot.startTime | date: 'mediumDate' }} </strong>
                     </ion-text>
@@ -115,8 +113,6 @@
           </div>
         </ion-list>
       </ion-col>
-      <ion-col></ion-col>
-
     </ion-row>
   </div>
 

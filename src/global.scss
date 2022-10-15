@@ -65,8 +65,43 @@ h1, h2, h3{
 
  .add-event-modal{
     margin: auto;
-    height: 70%;
-    width: 30%;
-    border-radius: 10px;
     border: 2px solid #2dd36f;
+    border-radius: 10px;
  }
+
+//  Form
+ .main-blck{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .sub-blck{
+        ion-card{
+            border-radius: 8%;
+            width: 26rem;
+            border: 2px solid;
+            ion-card-header{
+                padding-top: 30px;
+                text-align: center;
+            }
+            .card-btn{
+                text-align: center;
+                border: 1px solid #6666667d;
+                ion-button{
+                    width: 48%;
+                }
+            }
+            .link{
+                color: #28ba62;
+            }
+
+            .link:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// ion-content{
+//     --ion-background-color:#fff;
+// }
